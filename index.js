@@ -7,11 +7,13 @@ const app = express()
 const port = process.env.PORT || 3000;
 
 //express engine
-app.engine('handlebars', handlebars.engine({
+app.engine('hbs', handlebars.engine({
     extname: 'hbs'
 }))
-app.set('view engine', 'handlebars')
-app.set('views', '/src/views')
+app.set('view engine', 'hbs')
+app.set('views', './src/views')
+
+app.use(express.static('src/public'))
 
 
 //Routing
