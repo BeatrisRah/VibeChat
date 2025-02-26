@@ -136,6 +136,7 @@ a:focus {
 
 .header_section {
   padding: 15px 0;
+  background: linear-gradient(130deg, #231a6f, #0f054c);
 }
 
 .header_section .container-fluid {
@@ -415,7 +416,7 @@ a:focus {
           align-items: center;
   text-align: center;
   margin-top: 45px;
-  background-color: #f8f8f9;
+  background-color: #dfdbe2;
   padding: 20px;
   border-radius: 5px;
 }
