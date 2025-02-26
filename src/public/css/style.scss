@@ -2,8 +2,15 @@ $white: #ffffff;
 $black: #000000;
 // $primary1: #0cb1a8;
 $primary1: #00bbf0;
-$primary2: #00204a;
+$primary2: #4a004a;
 $textCol: #1f1f1f;
+
+// $white: #ffffff;
+// $black: #000000;
+// // $primary1: #0cb1a8;
+// $primary1: #00bbf0;
+// $primary2: #00204a;
+// $textCol: #1f1f1f;
 
 // import fonts - font-family: 'Open Sans', sans-serif;
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap");
@@ -490,7 +497,6 @@ a:focus {
       min-width: 120px;
       min-height: 120px;
       border-radius: 100%;
-      border: 5px solid $primary2;
       display: flex;
       justify-content: center;
       align-items: center;
