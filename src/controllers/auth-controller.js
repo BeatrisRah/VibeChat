@@ -12,7 +12,7 @@ authRouter.post('/register', async (req, res) => {
 
     try{
         await authService.registerUSer(userData)
-        
+        res.redirect('/')
 
     } catch(err){
         const error = getErrorMessage(err)

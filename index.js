@@ -3,6 +3,8 @@ import 'dotenv/config';
 import router from './routes.js';
 import handlebars from 'express-handlebars';
 import mongoose from 'mongoose';
+import expressSession from 'express-session'
+import { errorSetter } from './src/middlewares/error-middleware.js';
 
 try{
     await mongoose.connect(process.env.URI)
@@ -26,6 +28,13 @@ app.set('views', './src/views')
 
 app.use(express.static('src/public'))
 app.use(express.urlencoded({extended:false}))
+app.use(expressSession({
+    secret: 'Some cute secret idk',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false, httpOnly:true }
+}))
+app.use(errorSetter)
 
 //Routing
 app.use(router)

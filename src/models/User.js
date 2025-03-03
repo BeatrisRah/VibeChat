@@ -1,3 +1,4 @@
+import { hash } from "bcrypt";
 import {Schema, model} from "mongoose";
 
 const userSchema = new Schema({
@@ -15,6 +16,10 @@ const userSchema = new Schema({
         type:String,
         required:true
     }
+})
+
+userSchema.pre('save', async function () {
+    this.password = await hash(this.password, Number(process.env.SALT))
 })
 
 const User = model('User', userSchema)
