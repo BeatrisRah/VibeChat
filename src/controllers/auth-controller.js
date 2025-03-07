@@ -25,6 +25,19 @@ authRouter.get('/login', (req, res) => {
 })
 
 
+authRouter.post('/login', async (req, res) => {
+    const userData = req.body;
+
+    try{
+        await authService.login(userData)
+        res.redirect('/')
+
+    } catch(err){
+        const error = getErrorMessage(err)
+        res.render('login', {error})
+    }
+})
+
 
 
 export default authRouter;
