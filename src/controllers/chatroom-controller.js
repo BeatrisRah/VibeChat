@@ -3,7 +3,11 @@ const chatroomRoute = Router()
 
 
 chatroomRoute.get('/', (req, res) => {
-    res.render('chatroom')
+    res.render('chatroom/chatroom')
+})
+
+chatroomRoute.get('/create', (req, res) => {
+    res.render('chatroom/create')
 })
 
 
