@@ -15,10 +15,26 @@ function cheackData({username, email, password, rePass}){
     }
 }
 
-function generateToken(userData){
-    const paylot = {
-
+async function generateToken(userData){
+    const payload = {
+        id: userData._id,
+        email: userData.email,
+        username: userData.username
     }
+
+
+    const jwtSignPromise = (payload, secret, options) => {
+        return new Promise((resolve, reject) => {
+            jwt.sign(payload, secret, options, (err, token) => {
+                if (err) reject(err);
+                else resolve(token);
+            });
+        });
+    };
+    
+    const token = await jwtSignPromise(payload, process.env.SECRET, { expiresIn: '2h' });
+    return token;
+    
     
 }
 
@@ -32,11 +48,20 @@ export default {
             password: userData.password
         })
 
-        return user;
+        return await generateToken(user)
     },
 
     async login(userData){
         cheackData(userData)
 
+        const user = await User.findOne({email: userData.email})
+        if(!user) throw new Error('Invalid user or password!')
+
+        const isValid = await compare(userData.password, user.password)
+
+        if(!isValid) throw new Error('Invalid user or password!')
+
+        return await generateToken(user)
+        
     }
 }

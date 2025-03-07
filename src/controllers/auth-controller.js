@@ -11,7 +11,8 @@ authRouter.post('/register', async (req, res) => {
     const userData = req.body;
 
     try{
-        await authService.registerUSer(userData)
+        const token = await authService.registerUSer(userData)
+        console.log(token);
         res.redirect('/')
 
     } catch(err){
@@ -29,7 +30,9 @@ authRouter.post('/login', async (req, res) => {
     const userData = req.body;
 
     try{
-        await authService.login(userData)
+        const token = await authService.login(userData)
+        
+        
         res.redirect('/')
 
     } catch(err){
