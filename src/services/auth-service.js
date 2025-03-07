@@ -5,14 +5,13 @@ import { compare } from "bcrypt";
 
 function cheackData({username, email, password, rePass}){
     //check if data is an empty string
-    if(username === '' || 
-        email === '' ||
-        password === ''
+    if( email === '' || password === ''
     ) throw new Error('Please fill all inputs!')
 
+    if(username !== undefined && username === '') throw new Error('Please fill all inputs!')
     //! Check if works for log in!
     if(rePass !== undefined){
-        if(rePass === '' || rePass !== password) throw new Error("Passwords don't match!")
+        if(rePass === '' || rePass !== password ) throw new Error("Passwords don't match!")
     }
 }
 
@@ -34,5 +33,9 @@ export default {
         })
 
         return user;
+    },
+
+    async login(userData){
+        cheackData(userData)
     }
 }
