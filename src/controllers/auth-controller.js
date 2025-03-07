@@ -1,6 +1,7 @@
 import { Router } from "express";
 import authService from "../services/auth-service.js";
 import { getErrorMessage } from "../utils/error-message.js";
+import { isAuth } from "../middlewares/auth-middleware.js";
 const authRouter = Router()
 
 authRouter.get('/register', (req, res) => {
@@ -41,6 +42,10 @@ authRouter.post('/login', async (req, res) => {
     }
 })
 
+authRouter.get('/logout', isAuth, (req, res) => {
+    res.clearCookie('auth')
+    res.redirect('/')
+})
 
 
 export default authRouter;
