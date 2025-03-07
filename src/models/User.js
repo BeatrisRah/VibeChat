@@ -22,5 +22,5 @@ userSchema.pre('save', async function () {
     this.password = await hash(this.password, Number(process.env.SALT))
 })
 
-const User = model('User', userSchema)
+const User = model('User', userSchema, 'users')
 export default User;
