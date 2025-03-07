@@ -12,7 +12,7 @@ authRouter.post('/register', async (req, res) => {
 
     try{
         const token = await authService.registerUSer(userData)
-        console.log(token);
+        res.cookie('auth', token, {httpOnly:true})
         res.redirect('/')
 
     } catch(err){
@@ -31,7 +31,7 @@ authRouter.post('/login', async (req, res) => {
 
     try{
         const token = await authService.login(userData)
-        
+        res.cookie('auth', token, {httpOnly:true})
         
         res.redirect('/')
 

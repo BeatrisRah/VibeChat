@@ -5,6 +5,8 @@ import handlebars from 'express-handlebars';
 import mongoose from 'mongoose';
 import expressSession from 'express-session'
 import { errorSetter } from './src/middlewares/error-middleware.js';
+import cookieParser from 'cookie-parser';
+import { authMiddleware } from './src/middlewares/auth-middleware.js';
 
 try{
     await mongoose.connect(process.env.URI)
@@ -27,6 +29,7 @@ app.set('view engine', 'hbs')
 app.set('views', './src/views')
 
 app.use(express.static('src/public'))
+app.use(cookieParser())
 app.use(express.urlencoded({extended:false}))
 app.use(expressSession({
     secret: 'Some cute secret idk',
@@ -35,6 +38,7 @@ app.use(expressSession({
     cookie: { secure: false, httpOnly:true }
 }))
 app.use(errorSetter)
+app.use(authMiddleware)
 
 //Routing
 app.use(router)
