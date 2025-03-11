@@ -22,6 +22,8 @@ chatroomRoute.post('/create', isAuth, async (req, res) => {
         await chatroomService.create(chatroomData, ownerID)
         res.redirect('/chatrooms')
     } catch(err){
+        const error = getErrorMessage(err)
+        res.render('chatroom/create', {error})
     }
 
 })
