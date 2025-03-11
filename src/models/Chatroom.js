@@ -9,6 +9,9 @@ const chatroomSchema = new Schema({
         type:String,
         required: true
     },
+    visability:{
+        type:String
+    },
     owner: {
         type: Types.ObjectId,
         ref:'User'
