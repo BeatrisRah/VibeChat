@@ -10,11 +10,13 @@
                 <p>
                     Find what you vibe with.👀
                 </p>
+                {{#if user}}
                 <div class="btn-box-custom">
-                <a href="/chatrooms/create" class="create-btn">
-                    Or create one?
-                </a>
-            </div>
+                    <a href="/chatrooms/create" class="create-btn">
+                        Or create one?
+                    </a>
+                </div>
+                {{/if}}
             </div>
             <div class="row">
                 {{#each chatroomList}}
