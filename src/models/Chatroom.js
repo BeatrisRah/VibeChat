@@ -9,7 +9,7 @@ const chatroomSchema = new Schema({
         type:String,
         required: true
     },
-    visability:{
+    visibility:{
         type:String
     },
     owner: {
