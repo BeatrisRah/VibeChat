@@ -31,7 +31,10 @@ const port = process.env.PORT || 3000;
 
 //express engine
 app.engine('hbs', handlebars.engine({
-    extname: 'hbs'
+    extname: 'hbs',
+    runtimeOptions:{
+        allowProtoPropertiesByDefault:true
+    }
 }))
 app.set('view engine', 'hbs')
 app.set('views', './src/views')
