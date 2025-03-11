@@ -11,5 +11,10 @@ chatroomRoute.get('/create', (req, res) => {
 })
 
 
+chatroomRoute.post('/create', (req, res) => {
+    const chatroomData = req.body;
+    res.send(chatroomData)
+})
+
 
 export default chatroomRoute;

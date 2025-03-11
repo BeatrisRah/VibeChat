@@ -5,19 +5,20 @@
         <div class="card-body">
             <h1 class="mb-3" >Create Chatroom</h1>
             <h6 class="card-title mb-3">This chatroom is</h6>
+            <form method="post">
             <div class="d-flex flex-row"> <label class="radio mr-1"> 
-                <input type="radio" name="add" value="anz" checked> <span> <i class="fa fa-user"></i> Public </span> </label> <label class="radio"> 
-                <input type="radio" name="add" value="add"> <span> <i class="fa fa-plus-circle"></i> Private </span> </label> </div>
+                <input type="radio" name="visability" value="public" checked> <span> <i class="fa fa-user"></i> Public </span> </label> <label class="radio"> 
+                <input type="radio" name="visability" value="private" disabled> <span> <i class="fa fa-plus-circle"></i> Private </span> Coming soon </label> </div>
             
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label for="name" class="h5 mt-3">Title:</label>
-                        <input class="form-control" type="text" placeholder="Cats lovers..."> 
+                        <input class="form-control" type="text" name="title" placeholder="Cat lovers..."> 
 
 
                         <label for="name" class="h5 mt-3">Description:</label>
-                        <input class="form-control" type="text" placeholder="Share your cats with the world..."> 
+                        <input class="form-control" type="text" name="description" placeholder="Share your cats with the world..."> 
                     </div>
 
                 </div>
@@ -25,6 +26,7 @@
             <div class=" d-flex flex-column text-center px-5 mt-3 mb-3"> <small class="agree-text">By making this chatroom you agree to the</small> <a href="#" class="terms">Terms & Conditions</a> 
             </div> 
             <button class="btn btn-primary btn-block confirm-button">Create</button>
+            </form>
         </div>
     </div>
 </div>
