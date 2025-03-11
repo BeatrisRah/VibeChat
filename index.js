@@ -7,6 +7,7 @@ import expressSession from 'express-session'
 import { errorSetter } from './src/middlewares/error-middleware.js';
 import cookieParser from 'cookie-parser';
 import { authMiddleware } from './src/middlewares/auth-middleware.js';
+import { v2 as cloudinary } from 'cloudinary';
 
 try{
     await mongoose.connect(process.env.URI)
@@ -17,6 +18,13 @@ try{
     
     console.log(err);
 }
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET
+})
+
 
 const app = express()
 const port = process.env.PORT || 3000;

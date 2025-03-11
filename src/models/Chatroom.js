@@ -12,6 +12,9 @@ const chatroomSchema = new Schema({
     visibility:{
         type:String
     },
+    imageURL:{
+        type:String
+    },
     owner: {
         type: Types.ObjectId,
         ref:'User'
