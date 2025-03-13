@@ -450,12 +450,12 @@ a:focus {
 }
 
 .service_section .box .detail-box a {
-  color: #00204a;
+  color: #fefefe;
   font-weight: 600;
 }
 
 .service_section .box .detail-box a:hover {
-  color: #00bbf0;
+  color: #eb93bc;
 }
 
 .service_section .btn-box {
@@ -1031,3 +1031,4 @@ label.radio input:checked+span{
   height: 50px;
   border-radius: 10px
 }
+

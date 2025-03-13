@@ -8,6 +8,10 @@ import { errorSetter } from './src/middlewares/error-middleware.js';
 import cookieParser from 'cookie-parser';
 import { authMiddleware } from './src/middlewares/auth-middleware.js';
 import { v2 as cloudinary } from 'cloudinary';
+import { Server } from 'socket.io';
+import cors from 'cors'
+import http from 'http'
+
 
 try{
     await mongoose.connect(process.env.URI)
@@ -29,6 +33,8 @@ cloudinary.config({
 const app = express()
 const port = process.env.PORT || 3000;
 
+
+
 //express engine
 app.engine('hbs', handlebars.engine({
     extname: 'hbs',
@@ -39,8 +45,11 @@ app.engine('hbs', handlebars.engine({
 app.set('view engine', 'hbs')
 app.set('views', './src/views')
 
+
+app.use(cors());
 app.use(express.static('src/public'))
 app.use(cookieParser())
+app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(expressSession({
     secret: 'Some cute secret idk',
@@ -54,6 +63,17 @@ app.use(authMiddleware)
 //Routing
 app.use(router)
 
+const server = http.createServer(app)
+const io = new Server(server, {cors:{origin: '*', methods:['GET', 'POST']}})
+io.on('connection', (socket) => {
+    console.log('User connected');
+    
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+    });
+});
 
 
-app.listen(port, () => console.log(`App is listening at http://localhost:${port}...` ))
+
+
+server.listen(port, () => console.log(`App is listening at http://localhost:${port}...` ))

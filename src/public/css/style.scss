@@ -1,14 +1,14 @@
 $white: #ffffff;
 $black: #000000;
 // $primary1: #0cb1a8;
-$primary1: #00bbf0;
+$primary1: #f66fad;
 $primary2: #4a004a;
 $textCol: #1f1f1f;
 
 // $white: #ffffff;
 // $black: #000000;
 // // $primary1: #0cb1a8;
-// $primary1: #00bbf0;
+// $primary1: #f66fad;
 // $primary2: #00204a;
 // $textCol: #1f1f1f;
 
@@ -417,27 +417,13 @@ a:focus {
 
       p {}
 
-      a {
-        color: $primary2;
-        font-weight: 600;
-
-        &:hover {
-          color: $primary1;
-        }
-      }
+      
     }
 
   }
 
-  .btn-box {
-    display: flex;
-    justify-content: center;
-    margin-top: 45px;
-
-    a {
-      @include hero_btn($primary1, $white, 10px, 45px, 0);
-    }
-  }
+  
+  
 }
 
 // end service section
@@ -588,7 +574,7 @@ a:focus {
           font-size: 22px;
 
           &:hover {
-            color: $primary1;
+            color: #f66fad;
           }
         }
       }
