@@ -58,7 +58,9 @@ chatroomRoute.get('/:chatroomID/join', isAuth, async (req, res) => {
 })
 
 chatroomRoute.get('/:chatroomID/chat', (req, res) => {
-    res.render('chatroom/chatroomSpace', {chatroom:true})
+    const chatroomID = req.params.chatroomID;
+
+    res.render('chatroom/chatroomSpace', {chatroom:true, roomID:chatroomID})
 })
 
 export default chatroomRoute;
