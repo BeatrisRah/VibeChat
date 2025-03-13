@@ -10,5 +10,9 @@ export default{
 
     async getAll(){
         return await Chatroom.find({})
+    },
+
+    async joinChatRoom(chatroomID, userID){
+        await Chatroom.findByIdAndUpdate(chatroomID, {$push: {members: userID}})
     }
 }

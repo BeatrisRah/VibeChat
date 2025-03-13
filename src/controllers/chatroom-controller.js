@@ -43,7 +43,21 @@ chatroomRoute.post('/create', isAuth, upload.single('imageURL') , async (req, re
 })
 
 
-chatroomRoute.get('/:id/chat', (req, res) => {
+chatroomRoute.get('/:chatroomID/join', isAuth, async (req, res) => {
+    const chatroomID = req.params.chatroomID;
+    const userID = req.user.id;
+
+    try{
+        await chatroomService.joinChatRoom(chatroomID, userID)
+        res.redirect(`/chatrooms/${chatroomID}/chat`)
+    } catch(err){
+        const error = getErrorMessage(err)
+        res.setError(error)
+        res.redirect('/chatrooms')
+    }
+})
+
+chatroomRoute.get('/:chatroomID/chat', (req, res) => {
     res.render('chatroom/chatroomSpace', {chatroom:true})
 })
 
