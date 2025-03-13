@@ -43,4 +43,8 @@ chatroomRoute.post('/create', isAuth, upload.single('imageURL') , async (req, re
 })
 
 
+chatroomRoute.get('/:id/chat', (req, res) => {
+    res.render('chatroom/chatroomSpace', {chatroom:true})
+})
+
 export default chatroomRoute;
