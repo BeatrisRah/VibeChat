@@ -23,10 +23,10 @@ const chatroomSchema = new Schema({
         type: Types.ObjectId,
         ref: 'User'
     }],
-    // messages:[{
-    //     type: Types.ObjectId,
-    //     ref:'Message'
-    // }],
+    messages:[{
+        type: Types.ObjectId,
+        ref:'Message'
+    }],
     createdAt: { type: Date, default: Date.now }
 })
 
