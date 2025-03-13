@@ -12,7 +12,13 @@ export default{
         return await Chatroom.find({})
     },
 
+    async getOne(chatroomID){
+        return await Chatroom.findById(chatroomID);
+    },
+
     async joinChatRoom(chatroomID, userID){
         await Chatroom.findByIdAndUpdate(chatroomID, {$push: {members: userID}})
-    }
+    },
+
+    
 }
