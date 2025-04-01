@@ -15,7 +15,9 @@ export default function Navigation() {
                <li>
                   <details>
                      <summary>More</summary>
-                     <ul className="bg-base-100 bg-opacity-80 rounded-t-none p-2">
+                     <ul className="rounded-t-none p-2" style={{
+                        backgroundColor: "rgba(17, 24, 39, 0)", 
+                        backdropFilter: "blur(10px)"}} >
                         <li><a>Contact</a></li>
                         <li><a>Help</a></li>
                      </ul>
