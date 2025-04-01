@@ -1,6 +1,6 @@
 export default function Navigation() {
    return (
-      <div className="navbar fixed top-0 left-0 w-full px-4" 
+      <div className="navbar fixed top-0 left-0 w-full p-4" 
          style={{
          backgroundColor: "rgba(17, 24, 39, 0)", 
          backdropFilter: "blur(10px)",
