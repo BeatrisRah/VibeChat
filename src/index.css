@@ -14,3 +14,12 @@
     animation: bop 1s ease-in-out infinite;
     transform: scaleX(-1); 
 }
+
+::-webkit-scrollbar {
+    display: none;
+  }
+  
+  html, body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE & Edge */
+  }
