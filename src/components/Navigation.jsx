@@ -8,7 +8,7 @@ export default function Navigation() {
          backdropFilter: "blur(10px)",
       }}>
          <div className="flex-1">
-            <Link to='/' className="btn btn-ghost text-xl">VibeChat</Link>
+            <Link to='/' className="p-4 font-bold text-xl">VibeChat</Link>
          </div>
          <div className="flex-none">
             <ul className="menu menu-horizontal px-1 flex items-baseline">
@@ -24,11 +24,36 @@ export default function Navigation() {
                      </div>
                      <div className="drawer-side">
                         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 m-0">
-                           {/* User chatrooms and joined ones */}
-                           <li><a>Sidebar Item 1</a></li>
-                           <li><a>Sidebar Item 2</a></li>
-                        </ul>
+                        <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex flex-col gap-4">
+                           {/* Created Chatrooms */}
+                           <div>
+                                 <h3 className="text-lg font-semibold text-gray-500">Your Chatrooms</h3>
+                                 <ul className="mt-2 space-y-2">
+                                    <li><a>🔥 My Music Room</a></li>
+                                    <li><a>🎮 Gamers Hub</a></li>
+                                 </ul>
+                           </div>
+
+                           <div className="divider"></div> {/* DaisyUI Divider */}
+
+                           {/* Joined Chatrooms */}
+                           <div>
+                                 <h3 className="text-lg font-semibold text-gray-500">Joined Chatrooms</h3>
+                                 <ul className="mt-2 space-y-2">
+                                    <li><a>📚 Study Group</a></li>
+                                    <li><a>🏀 Sports Talk</a></li>
+                                 </ul>
+                           </div>
+
+                           <div className="divider"></div> {/* Another Divider */}
+
+                           {/* Create Chatroom Button */}
+                           <div className="mt-auto"> 
+                                 <button className="btn btn-secondary w-full bg-secondary hover:bg-pink-700">
+                                    + Create New Chatroom
+                                 </button>
+                           </div>
+                        </div>
                      </div>
                   </div>
                </li>
