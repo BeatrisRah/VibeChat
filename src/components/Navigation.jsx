@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 export default function Navigation() {
    return (
       <div className="navbar fixed top-0 left-0 w-full p-4" 
@@ -6,12 +8,13 @@ export default function Navigation() {
          backdropFilter: "blur(10px)",
       }}>
          <div className="flex-1">
-            <a className="btn btn-ghost text-xl">VibeChat</a>
+            <Link to='/' className="btn btn-ghost text-xl">VibeChat</Link>
          </div>
          <div className="flex-none">
             <ul className="menu menu-horizontal px-1">
-               <li><a>Home</a></li>
-               <li><a>About</a></li>
+               <li><Link to='/login' >Log in</Link></li>
+               <li><Link to='/chatrooms' >Chatrooms</Link></li>
+
                <li>
                   <details>
                      <summary>More</summary>
