@@ -8,22 +8,12 @@ export default function ChatroomSection() {
                <p className="text-gray-600 mt-2">Join a chatroom and start vibing with others!</p>
             </div>
             {/* Search Bar */}
-            <div className="flex justify-center mb-8">
+            {/* <div className="flex justify-center mb-8">
                <input type="text" placeholder="Search chatrooms..." className="input input-bordered w-full max-w-md text-gray-800" />
-            </div>
+            </div> */}
             {/* Chatroom Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-               {/* Sample Chatroom Card */}
-               <div className="card bg-white shadow-lg hover:shadow-2xl transition-all duration-300 p-6">
-                  <div className="card-body">
-                     <h3 className="text-2xl font-semibold text-secondary">🎵 Music Lovers</h3>
-                     <p className="text-gray-500">A place to share and discuss your favorite music.</p>
-                     <div className="flex items-center justify-between mt-4">
-                        <span className="text-gray-600 text-sm">🔹 120 members</span>
-                        <button className="btn btn-secondary bg-secondary hover:bg-pink-700 text-white">Join</button>
-                     </div>
-                  </div>
-               </div>
+               
                {/* Another Sample Chatroom */}
                <div className="card bg-white shadow-lg hover:shadow-2xl transition-all duration-300 p-6">
                   <div className="card-body">
