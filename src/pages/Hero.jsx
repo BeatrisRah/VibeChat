@@ -107,12 +107,12 @@ export default function Hero() {
                 </div>
             </div>
 
-            <div className="bg-purple-900 text-white py-16">
+            <div className="bg-[#A33C99] text-white py-16 mb-20">
                 <div className="container mx-auto px-6">
                     <h2 className="text-4xl font-semibold text-center mb-12">How It Works</h2>
                     <div className="flex flex-col space-y-12 md:space-y-0 md:grid md:grid-cols-3 md:gap-8 items-center">
                     <div className="relative flex flex-col items-center text-center md:col-span-1">
-                        <div className="w-16 h-16 flex items-center justify-center bg-purple-700 rounded-full text-2xl font-bold mb-4">1</div>
+                        <div className="w-16 h-16 flex items-center justify-center bg-[#DF4CCF] rounded-full text-2xl font-bold mb-4">1</div>
                         <h3 className="text-xl font-semibold">Sign Up &amp; Create Profile</h3>
                         <p className="text-gray-300">Register, set up your profile, and add an avatar to start connecting with others.</p>
                     </div>
@@ -122,7 +122,7 @@ export default function Hero() {
                     </div>
                     <div className="relative flex flex-col items-center text-center md:col-span-1">
                         
-                        <div className="w-16 h-16 flex items-center justify-center bg-purple-700 rounded-full text-2xl font-bold mb-4">3</div>
+                        <div className="w-16 h-16 flex items-center justify-center bg-[#DF4CCF] rounded-full text-2xl font-bold mb-4">3</div>
                         <h3 className="text-xl font-semibold">Start Chatting</h3>
                         <p className="text-gray-300">Send messages, react with emojis, and have fun connecting with people!</p>
                     </div>
@@ -131,13 +131,13 @@ export default function Hero() {
                         <div className="w-1 h-full bg-white rounded-full" />
                     </div>
                     <div className="relative flex flex-col items-center text-center md:col-span-1">
-                        <div className="w-16 h-16 flex items-center justify-center bg-purple-700 rounded-full text-2xl font-bold mb-4">2</div>
+                        <div className="w-16 h-16 flex items-center justify-center bg-[#DF4CCF] rounded-full text-2xl font-bold mb-4">2</div>
                         <h3 className="text-xl font-semibold">Join or Create a Chatroom</h3>
                         <p className="text-gray-300">Find the perfect chatroom or start your own with a custom theme.</p>
                     </div>
                     </div>
                     <div className="mt-12 flex justify-center">
-                    <button className="btn btn-primary text-white bg-purple-700 hover:bg-purple-800">Get Started Now</button>
+                    <button className="p-3 rounded text-white bg-[#DF4CCF] hover:bg-pink-600">Get Started Now</button>
                     </div>
                 </div>
             </div>
