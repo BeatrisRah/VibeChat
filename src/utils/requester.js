@@ -1,4 +1,6 @@
-export const request = async (url, signal,  data = null, ) => {
+export const request = async (url, abortController = null,  data = null, ) => {
+    const controller = abortController || new AbortController();
+    const signal = controller.signal;
 
     const options = { signal }
 
