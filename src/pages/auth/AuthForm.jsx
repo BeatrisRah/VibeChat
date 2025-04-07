@@ -1,5 +1,7 @@
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form"
+import authApi from "../../api/authApi";
 
 export default function AuthForm() {
     const [tab, setTab] = useState("login");
@@ -7,13 +9,32 @@ export default function AuthForm() {
 
     const password = watch('password')
 
+    const loginMutation = useMutation({
+        mutationFn:(data) => authApi.loginAPI(data),
+        onSuccess: (data) => {
+            console.log("Login successful:", data);
+        },
+        onError: (error) => {
+            console.error("Login failed:", error.message);
+        }
+    })
+
+    const registerMutation = useMutation({
+        mutationFn: (data) => authApi.registerAPI(data),
+        onSuccess: (data) => {
+            console.log("Login successful:", data);
+            
+        },
+        onError: (error) => {
+            console.error("Login failed:", error.message);
+        },
+    })
+
     const onSubmit = (data) => {
         if (tab === "login") {
-          
-          console.log("Logging in with:", data);
+            loginMutation.mutate(data)
         } else if (tab === "register") {
-         
-          console.log("Registering with:", data);
+            registerMutation.mutate(data)
         }
       };
 

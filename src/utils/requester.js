@@ -1,8 +1,8 @@
-export const request = async (url, abortController = null,  data = null, ) => {
-    const controller = abortController || new AbortController();
-    const signal = controller.signal;
+export const request = async (url, data = null, ) => {
+    // const controller = abortController || new AbortController();
+    // const signal = controller.signal;
 
-    const options = { signal }
+    const options = {}
 
     if (data){
         options['headers'] = {'Content-type': 'application/json'};
