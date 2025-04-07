@@ -15,7 +15,7 @@ export default function AuthForm() {
             console.log("Login successful:", data);
         },
         onError: (error) => {
-            console.error("Login failed:", error.message);
+            console.log("Login failed:", error.message);
         }
     })
 

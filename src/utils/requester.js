@@ -5,6 +5,7 @@ export const request = async (url, data = null, ) => {
     const options = {}
 
     if (data){
+        options['method'] = 'POST'
         options['headers'] = {'Content-type': 'application/json'};
         options['body'] = JSON.stringify(data);
     }
@@ -13,7 +14,8 @@ export const request = async (url, data = null, ) => {
         const response = await fetch(url, options);
 
         if (!response.ok) {
-            throw new Error(`Request failed with status: ${response.status}`);
+            const result = await response.json()
+            throw new Error(result.error);
         }
 
         return response.json();
