@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 
 export default function Hero() {
     return (
@@ -137,7 +139,7 @@ export default function Hero() {
                     </div>
                     </div>
                     <div className="mt-12 flex justify-center">
-                    <button className="p-3 rounded text-white bg-[#DF4CCF] hover:bg-pink-600">Get Started Now</button>
+                    <Link to='/login' className="p-3 rounded text-white bg-[#DF4CCF] hover:bg-pink-600">Get Started Now</Link>
                     </div>
                 </div>
             </div>

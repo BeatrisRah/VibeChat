@@ -49,9 +49,9 @@ export default function Navigation() {
 
                            {/* Create Chatroom Button */}
                            <div className="mt-auto"> 
-                                 <button className="btn btn-secondary w-full bg-secondary hover:bg-pink-700">
+                                 <Link to='/chatrooms/create' className="btn btn-secondary w-full bg-secondary hover:bg-pink-700">
                                     + Create New Chatroom
-                                 </button>
+                                 </Link>
                            </div>
                         </div>
                      </div>
