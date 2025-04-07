@@ -7,8 +7,8 @@ const loginAPI = async (data) => {
     return await  request(baseURL + '/login', data)
   };
 
-const registerAPI = async (signal, data) => {
-    return await request(baseURL + '/register',signal, data)
+const registerAPI = async (data) => {
+    return await request(baseURL + '/register', data)
 }
 
 export default{

@@ -22,7 +22,7 @@ export default function AuthForm() {
     const registerMutation = useMutation({
         mutationFn: (data) => authApi.registerAPI(data),
         onSuccess: (data) => {
-            console.log("Login successful:", data);
+            console.log("Register successful:", data);
             
         },
         onError: (error) => {
@@ -84,7 +84,15 @@ export default function AuthForm() {
                                 className="input input-bordered w-full" />
                                 {errors.password && <p className="text-red-500">{errors.password.message}</p>}
                         </div>
-                        <button type="submit" className="btn btn-primary w-full">Login</button>
+                        <button 
+                            type="submit" 
+                            className={`btn  w-full ${
+                                loginMutation.isPending ? 
+                                'btn-disabled' :
+                                'btn-primary'
+                            }`}
+                            disabled = {loginMutation.isPending}
+                            >Login</button>
                     </form>
                 )}
 
@@ -138,7 +146,15 @@ export default function AuthForm() {
                                 className="input input-bordered w-full"/>
                                 {errors.rePass && <p className="text-red-500">{errors.rePass.message}</p>}
                         </div>
-                        <button type="submit" className="btn btn-secondary w-full">Register</button>
+                        <button 
+                            type="submit" 
+                            className={`btn w-full ${
+                                registerMutation.isPending ? 
+                                'btn-disabled':
+                                'btn-secondary'
+                            }`}
+                            
+                            >Register</button>
                     </form>
                 )}
             </div>
