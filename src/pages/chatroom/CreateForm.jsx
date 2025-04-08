@@ -1,12 +1,19 @@
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 
 export default function CreateChatroom() {
     const {register, handleSubmit, watch, formState:{errors}} = useForm()
 
-
     const imageUrl = watch("imageUrl");
+
+    const chatroomMutation = useMutation({
+        mutationFn: (data) => null,
+        onSuccess: (data) => console.log('Success!', data),
+        onError: (error) => console.log('Error', error.message)
+        
+    })
     const onSubmit = (data) => {
-        console.log("Chatroom Data:", data);
+        chatroomMutation.mutate(data)
     };
 
     return (
@@ -129,6 +136,7 @@ export default function CreateChatroom() {
                     <button
                         type="submit"
                         className="btn btn-primary w-full bg-purple-700 hover:bg-purple-800"
+                        disabled={chatroomMutation.isPending}
                     >
                         Create Chatroom
                     </button>
