@@ -2,31 +2,40 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form"
 import authApi from "../../api/authApi";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/userSlice";
+import { useNavigate } from "react-router";
+import { toast, ToastContainer } from "react-toastify";
+
+
 
 export default function AuthForm() {
     const [tab, setTab] = useState("login");
     const {register, handleSubmit, formState: { errors }, watch} = useForm()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const password = watch('password')
 
     const loginMutation = useMutation({
         mutationFn:(data) => authApi.loginAPI(data),
         onSuccess: (data) => {
-            console.log("Login successful:", data);
+            dispatch(setUser(data))
+            navigate('/chatrooms')
         },
         onError: (error) => {
-            console.log("Login failed:", error.message);
+            toast.error(error.message)
         }
     })
 
     const registerMutation = useMutation({
         mutationFn: (data) => authApi.registerAPI(data),
         onSuccess: (data) => {
-            console.log("Register successful:", data);
-            
+            dispatch(setUser(data))
+            navigate('/chatrooms')
         },
         onError: (error) => {
-            console.error("Login failed:", error.message);
+            toast.error(error.message)
         },
     })
 
@@ -40,6 +49,7 @@ export default function AuthForm() {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-base-200">
+            <ToastContainer />
             <div className="w-full max-w-md p-6 bg-base-100 shadow-xl rounded-box">
                 <div role="tablist" className="tabs tabs-boxed mb-4 flex justify-center">
                     <button
