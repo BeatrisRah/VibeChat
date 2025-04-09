@@ -1,4 +1,4 @@
-import { request } from "../utils/requester.js"
+import { request } from "../utils/requester"
 
 const baseUrl = 'http://localhost:3030/api/chatrooms'
 

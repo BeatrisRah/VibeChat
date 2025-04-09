@@ -2,6 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import chatroomApi from "../../api/chatroomApi";
 import { useNavigate } from "react-router";
+import { toast, ToastContainer } from "react-toastify";
+
 
 export default function CreateChatroom() {
     const {register, handleSubmit, watch, formState:{errors}} = useForm()
@@ -12,7 +14,7 @@ export default function CreateChatroom() {
     const chatroomMutation = useMutation({
         mutationFn: (data) => chatroomApi.create(data),
         onSuccess: () => navigate('/chatrooms'),
-        onError: (error) => console.log('Error', error.message)
+        onError: (error) => toast.error(error.message)
         
     })
     const onSubmit = (data) => {
@@ -22,7 +24,7 @@ export default function CreateChatroom() {
     return (
         <div className="max-w-xl mx-auto my-25 p-6 bg-base-200 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold text-purple-800 mb-4">Create a New Chatroom</h2>
-
+            <ToastContainer />
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 {/* Chatroom Name */}
                 <div>
@@ -43,7 +45,7 @@ export default function CreateChatroom() {
                     </label>
                     <input
                         type="url"
-                        placeholder="https://example.com/cover.jpg"
+                        placeholder="https://community.softr.io/uploads/db9110/original/2X/7/74e6e7e382d0ff5d7773ca9a87e6f6f8817a68a6.jpeg"
                         {...register("imageUrl", {
                         pattern: {
                             value: /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i,
