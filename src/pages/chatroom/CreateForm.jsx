@@ -1,14 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import chatroomApi from "../../api/chatroomApi";
+import { useNavigate } from "react-router";
 
 export default function CreateChatroom() {
     const {register, handleSubmit, watch, formState:{errors}} = useForm()
+    const navigate = useNavigate()
 
     const imageUrl = watch("imageUrl");
 
     const chatroomMutation = useMutation({
-        mutationFn: (data) => null,
-        onSuccess: (data) => console.log('Success!', data),
+        mutationFn: (data) => chatroomApi.create(data),
+        onSuccess: () => navigate('/chatrooms'),
         onError: (error) => console.log('Error', error.message)
         
     })
