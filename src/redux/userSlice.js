@@ -5,7 +5,7 @@ const initialState = {
         username:'',
         email:'',
         id:'',
-        token:''},
+        token:null},
     ownedChatrooms: [],
     joinedChatrooms: []
 }

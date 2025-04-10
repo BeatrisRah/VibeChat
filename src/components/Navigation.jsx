@@ -1,6 +1,11 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router";
 
 export default function Navigation() {
+
+   const user = useSelector(state => state.user)
+   
+
    return (
       <div className="navbar fixed top-0 left-0 w-full p-4 z-[100]" 
          style={{
@@ -12,9 +17,10 @@ export default function Navigation() {
          </div>
          <div className="flex-none">
             <ul className="menu menu-horizontal px-1 flex items-baseline">
-               <li><Link to='/login' >Log in</Link></li>
+               
                <li><Link to='/chatrooms' >Chatrooms</Link></li>
 
+               {user.data.token ?
                <li>
                   <div className="drawer">
                      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -26,6 +32,7 @@ export default function Navigation() {
                         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
                         <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex flex-col gap-4">
                            {/* Created Chatrooms */}
+                           <h1 className="text-lg font-semibold text-center">{user?.data.username}</h1>
                            <div>
                                  <h3 className="text-lg font-semibold text-gray-500">Your Chatrooms</h3>
                                  <ul className="mt-2 space-y-2">
@@ -56,7 +63,8 @@ export default function Navigation() {
                         </div>
                      </div>
                   </div>
-               </li>
+               </li>: 
+               <li><Link to='/login' >Log in</Link></li>}
             </ul>
          </div>
       </div>
