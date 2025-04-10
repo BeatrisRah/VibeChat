@@ -1,4 +1,16 @@
+import { useQuery } from "@tanstack/react-query";
+import chatroomApi from "../../api/chatroomApi";
+import Chatroom from "./chatroom-item/Chatroom";
+
 export default function ChatroomSection() {
+   const {data, isPending, error} = useQuery({
+      queryKey:['chatrooms'],
+      queryFn: chatroomApi.getAll
+   })
+
+   // TODO ADD ERROR PAGE
+   if(error) return <h1>Something went wrong!: {error.message}</h1>
+
    return (
       <div className="bg-base-100 mt-20 min-h-screen py-12">
          <div className="container mx-auto px-6">
@@ -13,7 +25,8 @@ export default function ChatroomSection() {
             </div> */}
             {/* Chatroom Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-               
+               {isPending && <p>Loadaing...</p>}
+               {data && data.map(c => <Chatroom key={c.id} data={c} />)}
                {/* Another Sample Chatroom */}
                <div className="card bg-white shadow-lg hover:shadow-2xl transition-all duration-300 p-6">
                   <div className="card-body">
