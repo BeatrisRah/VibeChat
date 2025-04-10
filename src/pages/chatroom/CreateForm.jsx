@@ -3,21 +3,23 @@ import { useForm } from "react-hook-form";
 import chatroomApi from "../../api/chatroomApi";
 import { useNavigate } from "react-router";
 import { toast, ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
 
 export default function CreateChatroom() {
     const {register, handleSubmit, watch, formState:{errors}} = useForm()
+    const user = useSelector(state => state.user.data)
     const navigate = useNavigate()
 
     const imageUrl = watch("imageUrl");
 
     const chatroomMutation = useMutation({
-        mutationFn: (data) => chatroomApi.create(data),
+        mutationFn: (data) => chatroomApi.create(data, user),
         onSuccess: () => navigate('/chatrooms'),
         onError: (error) => toast.error(error.message)
         
     })
-    const onSubmit = (data) => {
+    const onSubmit = (data) => {        
         chatroomMutation.mutate(data)
     };
 

@@ -1,4 +1,4 @@
-export const request = async (url, data = null, ) => {
+export const request = async (url, data = null, token = null ) => {
     // const controller = abortController || new AbortController();
     // const signal = controller.signal;
 
@@ -9,6 +9,8 @@ export const request = async (url, data = null, ) => {
         options['headers'] = {'Content-type': 'application/json'};
         options['body'] = JSON.stringify(data);
     }
+
+    if(token) options['headers'] = {...options['headers'], authorization: token}
 
     try {
         const response = await fetch(url, options);
