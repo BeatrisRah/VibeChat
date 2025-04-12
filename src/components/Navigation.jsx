@@ -52,7 +52,13 @@ export default function Navigation() {
                      <div className="drawer-side">
                         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay !cursor-default"></label>
                         <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex flex-col gap-4">
-                           {/* Created Chatrooms */}
+                           {isPending && <span className="loading loading-dots loading-sm"></span>}
+                           {error && (
+                              <div role="alert" className="alert alert-error alert-soft">
+                                 <span>{error.message}</span>
+                              </div>
+                           )}
+
                            <h1 className="text-lg font-semibold text-center">{user?.data.username}</h1>
                            <div>
                                  <h3 className="text-lg font-semibold text-gray-500">Your Chatrooms</h3>
