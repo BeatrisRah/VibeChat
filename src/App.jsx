@@ -5,6 +5,7 @@ import Hero from "./pages/Hero"
 import ChatroomSection from "./pages/chatroom/ChatroomSection"
 import AuthForm from "./pages/auth/AuthForm"
 import CreateChatroom from "./pages/chatroom/CreateForm"
+import UserGuard from "./Guards/UserGuard"
 
 function App() {
 
@@ -14,7 +15,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Hero />} />
         <Route path="/chatrooms" element={<ChatroomSection />} />
-        <Route path="/chatrooms/create" element={<CreateChatroom />} />
+        <Route element={<UserGuard />}>
+          <Route path="/chatrooms/create" element={<CreateChatroom />} />
+        
+        </Route>
         <Route path="/login" element={<AuthForm />} />
       </Routes>
       

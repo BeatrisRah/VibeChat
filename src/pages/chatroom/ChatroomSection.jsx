@@ -26,7 +26,7 @@ export default function ChatroomSection() {
             {/* Chatroom Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                {isPending && <p>Loadaing...</p>}
-               {data && data.map(c => <Chatroom key={c.id} data={c} />)}
+               {data && data.map(c => <Chatroom key={c._id} data={c} />)}
                {/* Another Sample Chatroom */}
                <div className="card bg-white shadow-lg hover:shadow-2xl transition-all duration-300 p-6">
                   <div className="card-body">
