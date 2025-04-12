@@ -11,7 +11,12 @@ const registerAPI = async (data) => {
     return await request(baseURL + '/register', data)
 }
 
+const getUsersChats = async (userId) => {
+    return await request(baseURL + `/${userId}/chatrooms`)
+}
+
 export default{
     loginAPI,
-    registerAPI
+    registerAPI,
+    getUsersChats
 }

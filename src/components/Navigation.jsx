@@ -1,10 +1,31 @@
+import { useQuery } from "@tanstack/react-query";
+import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
+import authApi from "../api/authApi";
 
 export default function Navigation() {
+   const user = useSelector(state => state.user);
+   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const hasFetchedRef = useRef(false);
 
-   const user = useSelector(state => state.user)
-   
+   const { data, isPending, error, refetch } = useQuery({
+      queryKey: ['usersRooms', user.data.id],
+      queryFn: () => authApi.getUsersChats(user.data.id),
+      enabled: false, 
+   });
+
+   const handleChange = (e) => {
+      const isChecked = e.target.checked;
+      setIsDrawerOpen(isChecked);
+
+      
+      if (isChecked && !hasFetchedRef.current) {
+         hasFetchedRef.current = true;
+         refetch(); 
+      }
+   };
+
 
    return (
       <div className="navbar fixed top-0 left-0 w-full p-4 z-[100]" 
@@ -22,22 +43,25 @@ export default function Navigation() {
 
                {user.data.token ?
                <li>
-                  <div className="drawer">
-                     <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+                  <div className="drawer cursor-default">
+                     <input id="my-drawer" type="checkbox" onChange={handleChange} className="drawer-toggle" />
                      <div className="drawer-content">
                         {/* Page content here */}
                         <label htmlFor="my-drawer" className="btn btn-secondary drawer-button">Menu</label>
                      </div>
                      <div className="drawer-side">
-                        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+                        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay !cursor-default"></label>
                         <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex flex-col gap-4">
                            {/* Created Chatrooms */}
                            <h1 className="text-lg font-semibold text-center">{user?.data.username}</h1>
                            <div>
                                  <h3 className="text-lg font-semibold text-gray-500">Your Chatrooms</h3>
                                  <ul className="mt-2 space-y-2">
-                                    <li><a>🔥 My Music Room</a></li>
-                                    <li><a>🎮 Gamers Hub</a></li>
+                                    {data?.ownedRooms.length > 0 ? (
+                                       data?.ownedRooms.map(chat => <li key={chat._id}><a>{chat.title}</a></li>)
+                                    ): (
+                                       <p>No chatrooms... :(</p>
+                                    )}
                                  </ul>
                            </div>
 
@@ -47,8 +71,11 @@ export default function Navigation() {
                            <div>
                                  <h3 className="text-lg font-semibold text-gray-500">Joined Chatrooms</h3>
                                  <ul className="mt-2 space-y-2">
-                                    <li><a>📚 Study Group</a></li>
-                                    <li><a>🏀 Sports Talk</a></li>
+                                    {data?.joinedRooms.length > 0 ? (
+                                       data?.joinedRooms.map(chat => <li key={chat._id}><a>{chat.title}</a></li>)
+                                    ): (
+                                       <p>No chatrooms... :(</p>
+                                    )}
                                  </ul>
                            </div>
 
