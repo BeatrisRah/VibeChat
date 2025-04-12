@@ -53,6 +53,7 @@ export default function Navigation() {
                <li><Link to='/chatrooms' >Chatrooms</Link></li>
 
                {user.data.token ?
+               <>
                <li>
                   <div className="drawer cursor-default">
                      <input id="my-drawer" type="checkbox" onChange={handleChange} className="drawer-toggle" />
@@ -107,7 +108,9 @@ export default function Navigation() {
                         </div>
                      </div>
                   </div>
-               </li>: 
+               </li>
+               <li><Link to='/logout'>Logout</Link></li>
+               </>: 
                <li><Link to='/login' >Log in</Link></li>}
             </ul>
          </div>
