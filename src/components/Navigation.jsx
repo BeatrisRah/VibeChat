@@ -1,23 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
 import authApi from "../api/authApi";
+import { setChatrooms } from "../redux/userSlice";
 
 export default function Navigation() {
    const user = useSelector(state => state.user);
-   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const hasFetchedRef = useRef(false);
+   const hasFetchedRef = useRef(false);
+   const dispatch = useDispatch()
+   
 
-   const { data, isPending, error, refetch } = useQuery({
+   const { data, isPending, error, refetch} = useQuery({
       queryKey: ['usersRooms', user.data.id],
       queryFn: () => authApi.getUsersChats(user.data.id),
-      enabled: false, 
+      enabled: false,
    });
 
+   //if drawer is open for the first time fetch
    const handleChange = (e) => {
       const isChecked = e.target.checked;
-      setIsDrawerOpen(isChecked);
 
       
       if (isChecked && !hasFetchedRef.current) {
@@ -25,6 +27,15 @@ export default function Navigation() {
          refetch(); 
       }
    };
+
+   useEffect(() => {
+      if(!data) return
+
+      dispatch(setChatrooms({
+         joinedChatrooms: data.joinedRooms,
+         ownedChatrooms: data.ownedRooms
+         }))
+   }, [data])
 
 
    return (
