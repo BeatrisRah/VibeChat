@@ -1,11 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import storage from "../utils/storage";
 
 const initialState = {
-    data:{
-        username:'',
-        email:'',
-        id:'',
-        token:null},
+    data:storage.getAll(),
     ownedChatrooms: [],
     joinedChatrooms: []
 }
@@ -17,7 +14,7 @@ export const userSlice = createSlice({
         setUser: (state, action) => {
             const userData = action.payload;
             state.data = userData;
-            
+            storage.set(userData)
         },
         setChatrooms(state, action){
             const {joinedChatrooms, ownedChatrooms} = action.payload;
@@ -25,9 +22,10 @@ export const userSlice = createSlice({
             state.ownedChatrooms = ownedChatrooms
         },
         resetUser: (state) => {
-            state.data = initialState.data;
-            state.joinedChatrooms = initialState.joinedChatrooms;
-            state.ownedChatrooms = initialState.ownedChatrooms;
+            state.data = null;
+            state.joinedChatrooms = [];
+            state.ownedChatrooms = [];
+            localStorage.clear()
         }
     }
 })

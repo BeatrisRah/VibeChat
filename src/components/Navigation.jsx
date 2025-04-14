@@ -12,7 +12,7 @@ export default function Navigation() {
    
 
    const { data, isPending, error, refetch} = useQuery({
-      queryKey: ['usersRooms', user.data.id],
+      queryKey: ['usersRooms', user.data?.id],
       queryFn: () => authApi.getUsersChats(user.data.id),
       enabled: false,
    });
@@ -52,7 +52,7 @@ export default function Navigation() {
                
                <li><Link to='/chatrooms' >Chatrooms</Link></li>
 
-               {user.data.token ?
+               {user.data ?
                <>
                <li>
                   <div className="drawer cursor-default">
