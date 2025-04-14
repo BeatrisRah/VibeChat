@@ -7,6 +7,7 @@ import AuthForm from "./pages/auth/AuthForm"
 import CreateChatroom from "./pages/chatroom/CreateForm"
 import UserGuard from "./Guards/UserGuard"
 import ChatroomJoin from "./pages/chatroom/ChatroomJoin"
+import { ToastContainer } from "react-toastify"
 
 function App() {
 
@@ -23,6 +24,15 @@ function App() {
         </Route>
         <Route path="/login" element={<AuthForm />} />
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
       
       <Footer />
     </>

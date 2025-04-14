@@ -10,7 +10,7 @@ export default{
         return await request(baseUrl)
     },
 
-    async join(chatroomId, user){
-        await request(baseUrl + `/${chatroomId}/join`, null, user.token)
+    async join(chatroomId, token){
+        await request(baseUrl + `/${chatroomId}/join`, null ,token)
     }
 }
