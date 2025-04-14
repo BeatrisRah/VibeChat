@@ -8,5 +8,9 @@ export default{
 
     async getAll(){
         return await request(baseUrl)
+    },
+
+    async join(chatroomId, user){
+        await request(baseUrl + `/${chatroomId}/join`, null, user.token)
     }
 }
