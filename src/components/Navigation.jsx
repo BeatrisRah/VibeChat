@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
 import authApi from "../api/authApi";
-import { setChatrooms } from "../redux/userSlice";
+import { setChatrooms, resetUser } from "../redux/userSlice";
 
 export default function Navigation() {
    const user = useSelector(state => state.user);
@@ -20,7 +20,6 @@ export default function Navigation() {
    //if drawer is open for the first time fetch
    const handleChange = (e) => {
       const isChecked = e.target.checked;
-
       
       if (isChecked && !hasFetchedRef.current) {
          hasFetchedRef.current = true;
@@ -37,6 +36,9 @@ export default function Navigation() {
          }))
    }, [data])
 
+   const onLogout = () => {
+      dispatch(resetUser())
+   }
 
    return (
       <div className="navbar fixed top-0 left-0 w-full p-4 z-[100]" 
@@ -109,7 +111,7 @@ export default function Navigation() {
                      </div>
                   </div>
                </li>
-               <li><Link to='/logout'>Logout</Link></li>
+               <li><button onClick={onLogout} >Logout</button></li>
                </>: 
                <li><Link to='/login' >Log in</Link></li>}
             </ul>
