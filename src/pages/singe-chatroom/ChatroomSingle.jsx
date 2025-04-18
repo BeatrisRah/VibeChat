@@ -46,7 +46,7 @@ export default function ChatroomSingle({ roomName = "Chatroom" }) {
         if (input.trim()) {
           socket.emit("send_message", {
             chatroom: chatroomId,
-            sender: user.id,
+            sender: user.data.id,
             content: input,
           });
           setInput("");
@@ -75,7 +75,7 @@ export default function ChatroomSingle({ roomName = "Chatroom" }) {
                     <div className="flex-1 overflow-y-auto p-4 space-y-2">
                     {allMessages.length === 0 && <p>Be the first to chat...</p>}
                     {allMessages.map((msg, i) => (
-                        <ChatItem key={msg._id || `msg-${i}`} message={msg} userId={user.id} />
+                        <ChatItem key={msg._id || `msg-${i}`} message={msg} userId={user.data.id} />
                     ))}
                     </div>
 
