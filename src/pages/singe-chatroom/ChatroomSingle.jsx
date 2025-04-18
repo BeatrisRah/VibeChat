@@ -1,9 +1,21 @@
-import { useState, } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import chatroomApi from "../../api/chatroomApi";
+import socket from "./socket";
 
 
 
 export default function ChatroomSingle({ roomName = "Chatroom" }) {
+    const {chatroomId} = useParams()
     const [message, setMessage] = useState("");
+
+    const { data } = useQuery({
+        queryKey: ['messages', chatroomId],
+        queryFn: () => chatroomApi.getMessages(chatroomId)
+    })
+
+    
 
     const handleSend = (e) => {
         e.preventDefault();

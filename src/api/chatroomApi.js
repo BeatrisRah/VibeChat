@@ -12,5 +12,9 @@ export default{
 
     async join(chatroomId, token){
         await request(baseUrl + `/${chatroomId}/join`, null ,token)
+    },
+
+    async getMessages(chatroomId){
+        return await request(baseUrl + `/${chatroomId}/messages`)
     }
 }
