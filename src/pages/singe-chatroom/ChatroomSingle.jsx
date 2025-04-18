@@ -5,6 +5,7 @@ import chatroomApi from "../../api/chatroomApi";
 import socket from "./socket";
 import ChatItem from "./ChatItem";
 import { useSelector } from "react-redux";
+import { useMemo } from 'react';
 
 
 
@@ -12,23 +13,36 @@ export default function ChatroomSingle({ roomName = "Chatroom" }) {
     const user = useSelector(state => state.user)
     const {chatroomId} = useParams()
     
+    const [liveMessages, setLiveMessages] = useState([]);
     const [input, setInput] = useState("");
+    
+    
 
     const { data, isPending,  } = useQuery({
         queryKey: ['messages', chatroomId],
-        queryFn: () => chatroomApi.getMessages(chatroomId)
+        queryFn: () => chatroomApi.getOne(chatroomId)
     })
+
+    const allMessages = useMemo(() => {
+        return [...(data?.messages || []), ...liveMessages];
+      }, [data, liveMessages]);
 
     useEffect(() => {
         socket.connect()
+        socket.emit("join_room", chatroomId);
+
+        socket.on("recive_message", (message) => {
+            setLiveMessages(prev => [...prev, message]);
+        });
 
         return () => {
+            socket.off("recive_message");
             socket.disconnect()
         }
     }, [chatroomId])
     
 
-    const sendMessage = () => {
+    const sendMessage = () => {        
         if (input.trim()) {
           socket.emit("send_message", {
             chatroom: chatroomId,
@@ -59,10 +73,10 @@ export default function ChatroomSingle({ roomName = "Chatroom" }) {
                     {isPending && <span className="loading loading-spinner loading-md"></span>}
 
                     <div className="flex-1 overflow-y-auto p-4 space-y-2">
-
-                    {data && data.map(c => <ChatItem message={c} userId={user.id}  />)}
-                    {data && data.length === 0 && <p>Be the fisrt to chat...</p>}
-                        
+                    {allMessages.length === 0 && <p>Be the first to chat...</p>}
+                    {allMessages.map((msg, i) => (
+                        <ChatItem key={msg._id || `msg-${i}`} message={msg} userId={user.id} />
+                    ))}
                     </div>
 
                     {/* Input area */}

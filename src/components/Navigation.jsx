@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import authApi from "../api/authApi";
 import { setChatrooms, resetUser } from "../redux/userSlice";
 
@@ -9,6 +9,7 @@ export default function Navigation() {
    const user = useSelector(state => state.user);
    const hasFetchedRef = useRef(false);
    const dispatch = useDispatch()
+   const navigate = useNavigate()
    
 
    const { data, isPending, error, refetch} = useQuery({
@@ -38,6 +39,8 @@ export default function Navigation() {
 
    const onLogout = () => {
       dispatch(resetUser())
+      return navigate('/')
+
    }
 
    return (
