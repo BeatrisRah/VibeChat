@@ -8,6 +8,7 @@ import CreateChatroom from "./pages/chatroom/CreateForm"
 import UserGuard from "./Guards/UserGuard"
 import ChatroomJoin from "./pages/chatroom/ChatroomJoin"
 import { ToastContainer } from "react-toastify"
+import ChatroomSingle from "./pages/singe-chatroom/ChatroomSingle"
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/chatrooms" element={<ChatroomSection />} />
         <Route element={<UserGuard />}>
           <Route path="/chatrooms/create" element={<CreateChatroom />} />
+          <Route path="/chatrooms/:chatroomId" element={<ChatroomSingle />} />
           <Route path="/chatrooms/:chatroomId/join" element={<ChatroomJoin />} />
         
         </Route>

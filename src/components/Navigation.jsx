@@ -78,7 +78,7 @@ export default function Navigation() {
                                  <h3 className="text-lg font-semibold text-gray-500">Your Chatrooms</h3>
                                  <ul className="mt-2 space-y-2">
                                     {data?.ownedRooms.length > 0 ? (
-                                       data?.ownedRooms.map(chat => <li key={chat._id}><a>{chat.title}</a></li>)
+                                       data?.ownedRooms.map(chat => <li key={chat._id}><Link to={`/chatrooms/${chat._id}`}>{chat.title}</Link></li>)
                                     ): (
                                        <p>No chatrooms... :(</p>
                                     )}
