@@ -15,6 +15,13 @@ export default function ChatroomSingle({ roomName = "Chatroom" }) {
         queryFn: () => chatroomApi.getMessages(chatroomId)
     })
 
+    useEffect(() => {
+        socket.connect()
+
+        return () => {
+            socket.disconnect()
+        }
+    }, [chatroomId])
     
 
     const handleSend = (e) => {
