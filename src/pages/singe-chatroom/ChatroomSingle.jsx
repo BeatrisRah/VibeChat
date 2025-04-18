@@ -3,14 +3,18 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import chatroomApi from "../../api/chatroomApi";
 import socket from "./socket";
+import ChatItem from "./ChatItem";
+import { useSelector } from "react-redux";
 
 
 
 export default function ChatroomSingle({ roomName = "Chatroom" }) {
+    const user = useSelector(state => state.user)
     const {chatroomId} = useParams()
-    const [message, setMessage] = useState("");
+    
+    const [input, setInput] = useState("");
 
-    const { data } = useQuery({
+    const { data, isPending,  } = useQuery({
         queryKey: ['messages', chatroomId],
         queryFn: () => chatroomApi.getMessages(chatroomId)
     })
@@ -24,13 +28,16 @@ export default function ChatroomSingle({ roomName = "Chatroom" }) {
     }, [chatroomId])
     
 
-    const handleSend = (e) => {
-        e.preventDefault();
-        if (!message.trim()) return;
-        // Add logic to send message
-        setMessage("");
-    };
-
+    const sendMessage = () => {
+        if (input.trim()) {
+          socket.emit("send_message", {
+            chatroom: chatroomId,
+            sender: user.id,
+            content: input,
+          });
+          setInput("");
+        }
+      };
     return (
         <div className="flex flex-col mx-auto mt-24 h-[50rem] bg-base-200">
 
@@ -49,27 +56,27 @@ export default function ChatroomSingle({ roomName = "Chatroom" }) {
                 {/* Chat messages and input */}
                 <div className="flex-1 flex flex-col justify-between">
                     {/* Messages */}
+                    {isPending && <span className="loading loading-spinner loading-md"></span>}
+
                     <div className="flex-1 overflow-y-auto p-4 space-y-2">
-                        {/* Replace with dynamic messages */}
-                        <div className="chat chat-start">
-                            <div className="chat-bubble">Hello!</div>
-                        </div>
-                        <div className="chat chat-end">
-                            <div className="chat-bubble chat-bubble-primary">Hey there!</div>
-                        </div>
+
+                    {data && data.map(c => <ChatItem message={c} userId={user.id}  />)}
+                    {data && data.length === 0 && <p>Be the fisrt to chat...</p>}
+                        
                     </div>
 
                     {/* Input area */}
-                    <form onSubmit={handleSend} className="p-4 bg-base-100 border-t flex items-center gap-2">
+                    <div className="p-4 bg-base-100 border-t flex items-center gap-2">
                         <input
-                            type="text"
-                            placeholder="Type a message..."
-                            className="input input-bordered w-full"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
+                        className="input input-bordered w-full"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        placeholder="Write a message..."
                         />
-                        <button type="submit" className="btn btn-primary">Send</button>
-                    </form>
+                        <button onClick={sendMessage}>Send</button>
+
+                    </div>
+    
                 </div>
             </div>
         </div>
