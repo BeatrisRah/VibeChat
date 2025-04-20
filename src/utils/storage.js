@@ -4,7 +4,13 @@ export default{
     },
 
     getAll(){
-        return JSON.parse(localStorage.getItem('auth')) || null
+        try {
+            const raw = localStorage.getItem('auth');
+            return raw ? JSON.parse(raw) : null;
+            } catch (err) {
+            console.error("Failed to parse localStorage auth", err);
+            return null;
+            }
     },
 
     get(key){
