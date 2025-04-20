@@ -1,5 +1,5 @@
 export default function ChatItem({message, userId}) {
-    const isSender = message.sender === userId;
+    const isSender = message.sender?._id === userId;
     
     
 
@@ -7,8 +7,7 @@ export default function ChatItem({message, userId}) {
         return(
             <div className="chat chat-end">
                 <div className="chat-header">
-                    {/* Add username */}
-                    Obi-Wan Kenobi
+                    {message.sender?.username}
                 </div>
                 <div className="chat-bubble chat-bubble-primary">{message.content}</div>
             </div>
@@ -18,8 +17,7 @@ export default function ChatItem({message, userId}) {
    return (
     <div className="chat chat-start">
         <div className="chat-header">
-            {/* Add username */}
-            Obi-Wan Kenobi
+            {message.sender?.username}
         </div>
         <div className="chat-bubble">{message.content}</div>
     </div>
