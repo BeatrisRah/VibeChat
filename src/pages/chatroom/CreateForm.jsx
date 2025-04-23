@@ -3,19 +3,25 @@ import { useForm } from "react-hook-form";
 import chatroomApi from "../../api/chatroomApi";
 import { useNavigate } from "react-router";
 import { toast, ToastContainer } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { triggerRefetch } from "../../redux/reFetchSlice";
 
 
 export default function CreateChatroom() {
     const {register, handleSubmit, watch, formState:{errors}} = useForm()
     const user = useSelector(state => state.user.data)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    // const queryClient = useQueryClient()
 
     const imageUrl = watch("imageUrl");
 
     const chatroomMutation = useMutation({
-        mutationFn: (data) => chatroomApi.create(data, user),
-        onSuccess: () => navigate('/chatrooms'),
+        mutationFn:(data) =>  chatroomApi.create(data, user),
+        onSuccess: async () => {
+            dispatch(triggerRefetch())
+            navigate('/chatrooms')
+        },
         onError: (error) => toast.error(error.message)
         
     })
@@ -50,7 +56,7 @@ export default function CreateChatroom() {
                         placeholder="https://example.com/cover.jpg"
                         {...register("imageUrl", {
                         pattern: {
-                            value: /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i,
+                            value: /^https?:\/\/.+?(?:\.(jpg|jpeg|png|webp|gif))?$/i,
                             message: "Please enter a valid image URL",
                         },
                         required: "Please choose a category" 
@@ -60,7 +66,7 @@ export default function CreateChatroom() {
                     {errors.imageUrl && <p className="text-error text-sm mt-1">{errors.imageUrl.message}</p>}
 
                     {/* Preview */}
-                    {imageUrl && /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i.test(imageUrl) && (
+                    {imageUrl && /^https?:\/\/.+?(?:\.(jpg|jpeg|png|webp|gif))?$/i.test(imageUrl) && (
                         <div className="mt-4">
                         <p className="text-sm text-gray-500 mb-1">Preview:</p>
                         <img
