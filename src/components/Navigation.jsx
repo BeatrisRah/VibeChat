@@ -45,9 +45,11 @@ export default function Navigation() {
       }))
    }, [data])
 
-   const onLogout = () => {
+   const onLogout = async () => {
       dispatch(resetUser())
-      return navigate('/')
+      setTimeout(() => {
+         navigate('/');
+      }, 100);
 
    }
 
