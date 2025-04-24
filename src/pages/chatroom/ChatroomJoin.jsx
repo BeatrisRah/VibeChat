@@ -11,7 +11,7 @@ export default function ChatroomJoin() {
     const navigate = useNavigate()
     const userToken = useSelector(state => state.user.data.token)
 
-    const {isSuccess, isPending, error} = useQuery({
+    const {isSuccess, error} = useQuery({
         queryKey: ['chatroomJoin'],
         queryFn: () => chatroomApi.join(chatroomId, userToken),
         retry: false
