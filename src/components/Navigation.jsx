@@ -15,7 +15,7 @@ export default function Navigation() {
 
    const { data, isPending, error, refetch } = useQuery({
       queryKey: ['usersRooms', user.data?.id],
-      queryFn: () => authApi.getUsersChats(user.data.id),
+      queryFn: () => authApi.getUsersChats(user.data.id, user.data.token),
       enabled: false,
    });
 

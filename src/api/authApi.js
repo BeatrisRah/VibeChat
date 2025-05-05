@@ -11,8 +11,8 @@ const registerAPI = async (data) => {
     return await request(baseURL + '/register', data)
 }
 
-const getUsersChats = async (userId) => {
-    return await request(baseURL + `/${userId}/chatrooms`)
+const getUsersChats = async (userId, token) => {
+    return await request(baseURL + `/${userId}/chatrooms`, null, token)
 }
 
 export default{
