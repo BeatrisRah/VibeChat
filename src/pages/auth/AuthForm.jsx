@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/userSlice";
 import { useNavigate } from "react-router";
 import { toast, ToastContainer } from "react-toastify";
+import { triggerRefetch } from "../../redux/reFetchSlice";
 
 
 
@@ -21,6 +22,7 @@ export default function AuthForm() {
         mutationFn:(data) => authApi.loginAPI(data),
         onSuccess: (data) => {
             dispatch(setUser(data))
+            dispatch(triggerRefetch())
             navigate('/chatrooms')
         },
         onError: (error) => {
