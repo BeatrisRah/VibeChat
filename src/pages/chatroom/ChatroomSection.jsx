@@ -28,27 +28,7 @@ export default function ChatroomSection() {
                {isPending && <p>Loadaing...</p>}
                {data && data.map(c => <Chatroom key={c._id} data={c} />)}
                {/* Another Sample Chatroom */}
-               <div className="card bg-white shadow-lg hover:shadow-2xl transition-all duration-300 p-6">
-                  <div className="card-body">
-                     <h3 className="text-2xl font-semibold text-purple-700">🎮 Gaming Hub</h3>
-                     <p className="text-gray-500">For gamers to chat, find teammates, and discuss new releases.</p>
-                     <div className="flex items-center justify-between mt-4">
-                        <span className="text-gray-600 text-sm">🔹 250 members</span>
-                        <button className="btn btn-primary bg-purple-700 hover:bg-purple-800 text-white">Join</button>
-                     </div>
-                  </div>
-               </div>
-               {/* Example Chatroom */}
-               <div className="card bg-white shadow-lg hover:shadow-2xl transition-all duration-300 p-6">
-                  <div className="card-body">
-                     <h3 className="text-2xl font-semibold text-purple-700">💬 Casual Talk</h3>
-                     <p className="text-gray-500">Talk about anything! No topic is off-limits (within reason 😉).</p>
-                     <div className="flex items-center justify-between mt-4">
-                        <span className="text-gray-600 text-sm">🔹 180 members</span>
-                        <button className="btn btn-primary bg-purple-700 hover:bg-purple-800 text-white">Join</button>
-                     </div>
-                  </div>
-               </div>
+               
                {/* Add more chatrooms dynamically */}
             </div>
             {/* Load More Button */}

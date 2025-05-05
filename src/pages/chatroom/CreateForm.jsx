@@ -14,7 +14,7 @@ export default function CreateChatroom() {
     const dispatch = useDispatch()
     // const queryClient = useQueryClient()
 
-    const imageUrl = watch("imageUrl");
+    const imageUrl = watch("imageURL");
 
     const chatroomMutation = useMutation({
         mutationFn:(data) =>  chatroomApi.create(data, user),
@@ -54,7 +54,7 @@ export default function CreateChatroom() {
                     <input
                         type="url"
                         placeholder="https://example.com/cover.jpg"
-                        {...register("imageUrl", {
+                        {...register("imageURL", {
                         pattern: {
                             value: /^https?:\/\/.+?(?:\.(jpg|jpeg|png|webp|gif))?$/i,
                             message: "Please enter a valid image URL",
