@@ -17,6 +17,7 @@ export default function Navigation() {
       queryKey: ['usersRooms', user.data?.id],
       queryFn: () => authApi.getUsersChats(user.data.id, user.data.token),
       enabled: false,
+      retry: false
    });
 
    //if drawer is open for the first time fetch
@@ -51,6 +52,10 @@ export default function Navigation() {
          navigate('/');
       }, 100);
 
+   }
+
+   if(error?.message === 'Invalid or Expired Token'){
+      navigate('/login')
    }
 
    return (
